@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SpinWheel/Scenes/SampleScene.unity
+    path: Assets/SpinWheel/Scenes/Master.unity
+    guid: 865b71a5c47d64fa8b3ba12854eeb3d1
+  - enabled: 1
+    path: Assets/SpinWheel/Scenes/Overlay.unity
+    guid: 777ed1edfba564d97ab913129f1622ee
+  - enabled: 1
+    path: Assets/SpinWheel/Scenes/SpinGame.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects: {}
