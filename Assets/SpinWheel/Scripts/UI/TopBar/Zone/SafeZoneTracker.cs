@@ -30,7 +30,8 @@ namespace SpinWheel.Scripts.UI.Zone
 
         protected override void HandleThresholdReached()
         {
-            new ZoneSpinRequested(ZoneData.WheelType).Raise();
+            if (!ShouldStopEvents)
+                new ZoneSpinRequested(ZoneData.WheelType).Raise();
 
             IncreaseRequirement();
             if (ZoneData.RequiredZoneCount % 30 == 0)

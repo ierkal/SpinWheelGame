@@ -1,4 +1,5 @@
 using DG.Tweening;
+using SpinWheel.Scripts.Manager;
 using SpinWheel.Scripts.Utility.Event;
 using UnityEngine;
 
@@ -6,8 +7,7 @@ namespace SpinWheel.Scripts.Wheel
 {
     public class WheelPicker : MonoBehaviour
     {
-        [Header("Wheels")] 
-        public GameObject BronzeWheel;
+        [Header("Wheels")] public GameObject BronzeWheel;
         public GameObject SilverWheel;
         public GameObject GoldenWheel;
 
@@ -20,11 +20,26 @@ namespace SpinWheel.Scripts.Wheel
 
         private bool _zoneRequested;
 
+
         private void Start()
         {
             ActiveOnly(BronzeWheel);
+            _currentTier = WheelType.Normal;
+
+            if (GameManager.Instance.StartIndex > 1)
+                OverridePicker();
         }
-  
+
+        private void OverridePicker()
+        {
+            if (GameManager.Instance.StartIndex > 0 && GameManager.Instance.StartIndex % 30 == 0)
+                new ZoneSpinRequested(WheelType.Super).Raise();
+            else if (GameManager.Instance.StartIndex > 0 && GameManager.Instance.StartIndex % 5 == 0)
+                new ZoneSpinRequested(WheelType.Safe).Raise();
+            else
+                RequestNormalWheel();
+        }
+
         private void Awake()
         {
             EventBroker.Instance.AddEventListener<ZoneSpinRequested>(OnZoneSpinRequested);
@@ -98,7 +113,7 @@ namespace SpinWheel.Scripts.Wheel
                 }))
                 .Append(toT.DOScale(1f, _duration).SetEase(_easeMode));
         }
-        
+
         private GameObject GetWheel(WheelType type) =>
             type switch
             {

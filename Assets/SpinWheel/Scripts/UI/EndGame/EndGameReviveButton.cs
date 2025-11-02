@@ -17,7 +17,14 @@ namespace SpinWheel.Scripts.UI.EndGame
         private void Awake()
         {
             _button = GetComponent<Button>();
+            EventBroker.Instance.AddEventListener<OnGameEnds>(OnGameEnd);
         }
+
+        private void OnGameEnd(OnGameEnds e)
+        {
+            _reviveCount = 1;
+        }
+
         private void OnEnable()
         {
             int playerGold = CurrencyManager.Instance.GetCurrency(ResourceType.Gold);

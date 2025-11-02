@@ -8,8 +8,7 @@ namespace SpinWheel.Scripts.UI.Zone
 {
     public class SuperZoneTracker : ZoneTracker
     {
-        [Header("UI")]
-        [SerializeField] private Image _zoneRewardImage;
+        [Header("UI")] [SerializeField] private Image _zoneRewardImage;
 
         private ItemDataSO _zoneRewardItemSO;
         private ItemData _zoneRewardItem;
@@ -36,7 +35,9 @@ namespace SpinWheel.Scripts.UI.Zone
 
         protected override void HandleThresholdReached()
         {
-            RaiseZoneSpinRequest();
+            if (!ShouldStopEvents)
+                RaiseZoneSpinRequest();
+            
             IncreaseRequirement();
             CacheZoneReward();
             UpdateZoneRewardImage();

@@ -16,6 +16,7 @@ namespace SpinWheel.Scripts.UI.Zone
         private int _initialRequiredZoneCount;
 
         private Sequence _sequence;
+        protected bool ShouldStopEvents;
         protected virtual void Awake()
         {
             UpdateText();
@@ -26,7 +27,9 @@ namespace SpinWheel.Scripts.UI.Zone
             _initialRequiredZoneCount = ZoneData.RequiredZoneCount;
             
             CurrentZoneCount = GameManager.Instance ? GameManager.Instance.StartIndex : 0;
+            ShouldStopEvents = true;
             CatchUpWithStartIndex();
+            ShouldStopEvents = false;
         }
 
         private void OnEnable()
