@@ -12,10 +12,11 @@ namespace SpinWheel.Scripts.Manager
         [SerializeField] private ReviveData _reviveData;
         private int _gold;
         private int _cash;
-
+        private int _reviveCost;
         private void Awake()
         {
             InitializeSingleton();
+            _reviveCost = _reviveData.ReviveCost;
         }
 
         private void OnEnable()
@@ -48,6 +49,8 @@ namespace SpinWheel.Scripts.Manager
         {
             _gold = 0;
             _cash = 0;
+            _reviveCost = _reviveData.ReviveCost;
+            
         }
         private void OnChange(OnCurrencyChanged e)
         {
@@ -75,7 +78,7 @@ namespace SpinWheel.Scripts.Manager
         }
         public int CalculateReviveCost(int reviveCount)
         {
-            return _reviveData.ReviveCost * reviveCount;
+            return _reviveCost * reviveCount;
         }
     
     }
