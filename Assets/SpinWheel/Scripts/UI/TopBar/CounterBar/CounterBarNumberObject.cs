@@ -14,7 +14,7 @@ public class CounterBarNumberObject : MonoBehaviour
     private Color _textSafeZoneColor = Color.green;
     private Color _textSuperZoneColor = Color.yellow;
 
-    private bool _isSafeZoneNumber => _value%5==0;
+    private bool _isSafeZoneNumber => _value%5==0 || _value==1;
     private bool _isSuperZoneNumber => _value%30==0;
     private int _value;
 

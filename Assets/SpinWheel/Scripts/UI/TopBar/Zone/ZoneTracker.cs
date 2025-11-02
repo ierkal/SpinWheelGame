@@ -36,18 +36,18 @@ namespace SpinWheel.Scripts.UI.Zone
         private void OnEnable()
         {
             EventBroker.Instance.AddEventListener<ZoneCountIncrement>(OnIncrement);
-            EventBroker.Instance.AddEventListener<OnGameEnds>(OnGiveUp);
+            EventBroker.Instance.AddEventListener<OnGameEnds>(OnGameEnd);
         }
 
         private void OnDisable()
         {
             EventBroker.Instance.RemoveEventListener<ZoneCountIncrement>(OnIncrement);
-            EventBroker.Instance.RemoveEventListener<OnGameEnds>(OnGiveUp);
+            EventBroker.Instance.RemoveEventListener<OnGameEnds>(OnGameEnd);
             
             Sequence?.Kill();
         }
 
-        private void OnGiveUp(OnGameEnds e)
+        private void OnGameEnd(OnGameEnds e)
         {
             CurrentZoneCount = 0;
             ZoneData.RequiredZoneCount = _initialRequiredZoneCount;
@@ -68,18 +68,15 @@ namespace SpinWheel.Scripts.UI.Zone
         }
         private void CatchUpIfNeeded()
         {
-            // Protect against accidental infinite loops
-            int guard = 1000;
-            while (IsCountReached() && guard-- > 0)
+            while (IsCountReached())
             {
                 HandleThresholdReached();
             }
             UpdateText();
         }
-        // Helper for derived classes to bump the requirement
-        protected void BumpRequirement(int by)
+        protected void IncreaseRequirement()
         {
-            ZoneData.RequiredZoneCount += by;
+            ZoneData.RequiredZoneCount += ZoneData.NextIncrement;
         }
     }
 }

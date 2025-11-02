@@ -12,9 +12,9 @@ namespace SpinWheel.Scripts.UI.Zone
     {
         [SerializeField] private Image _zoneRewardImage;
 
-        // Cached reward references for current zone cycle
         private ItemDataSO _zoneRewardItemSO;
         private ItemData _zoneRewardItem;
+        private GameManager gm => GameManager.Instance;
 
         protected override void Awake()
         {
@@ -29,14 +29,16 @@ namespace SpinWheel.Scripts.UI.Zone
 
             if (!IsCountReached()) return;
 
-            // Process current and any further passed thresholds
-            do { HandleThresholdReached(); } while (IsCountReached());
+            do
+            {
+                HandleThresholdReached();
+            } while (IsCountReached());
         }
 
         protected override void HandleThresholdReached()
         {
             RaiseZoneSpinRequest();
-            BumpRequirement(ZoneData.NextIncrement);
+            IncreaseRequirement();
             CacheZoneReward();
             UpdateZoneRewardImage();
             UpdateText();
@@ -44,9 +46,6 @@ namespace SpinWheel.Scripts.UI.Zone
 
         private void CacheZoneReward()
         {
-            var gm = GameManager.Instance;
-            if (gm == null) return;
-
             if (gm.IsRuntimeUsed)
             {
                 _zoneRewardItemSO = ZoneData.ZoneRewardItemSO ?? gm.ItemTable.RandomItem;
@@ -76,9 +75,6 @@ namespace SpinWheel.Scripts.UI.Zone
 
         private void RaiseZoneSpinRequest()
         {
-            var gm = GameManager.Instance;
-            if (gm == null) return;
-
             if (gm.IsRuntimeUsed)
             {
                 if (_zoneRewardItemSO)

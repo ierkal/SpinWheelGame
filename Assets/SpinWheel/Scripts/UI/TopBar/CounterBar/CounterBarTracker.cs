@@ -1,30 +1,28 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using SpinWheel.Scripts.Manager;
 using SpinWheel.Scripts.Utility.Event;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CounterBarScrollView : MonoBehaviour
+public class CounterBarTracker : MonoBehaviour
 {
+    private const float START_POS_X = 500;
+    
     [SerializeField] private GameObject _numberPrefab;
     [SerializeField] private RectTransform _numberParent;
     [SerializeField] private float _deductPos;
-    private readonly float _startPosX = 500;
-    private List<int> _countNumbers = new(14);
-    private List<CounterBarNumberObject> _numberObjects = new();
+    
+    
+    private readonly List<int> _countNumbers = new(14);
+    private readonly List<CounterBarNumberObject> _numberObjects = new();
     private int _spinCount;
     private int _currentNumber = 1;
-    private int _startIndex => GameManager.Instance.StartIndex;
-
+    private int StartIndex => GameManager.Instance.StartIndex;
     private void Awake()
     {
         InitializeList();
     }
-
     private void OnEnable()
     {
         EventBroker.Instance.AddEventListener<OnWheelStop>(OnSpinStop);
@@ -36,11 +34,9 @@ public class CounterBarScrollView : MonoBehaviour
         EventBroker.Instance.RemoveEventListener<OnWheelStop>(OnSpinStop);
         EventBroker.Instance.RemoveEventListener<OnGameEnds>(OnGiveUp);
     }
-
-
     private void InitializeList()
     {
-        for (int i = _startIndex; i < _startIndex + _countNumbers.Capacity; i++)
+        for (int i = StartIndex; i < StartIndex + _countNumbers.Capacity; i++)
         {
             CounterBarNumberObject number =
                 Instantiate(_numberPrefab, _numberParent).GetComponent<CounterBarNumberObject>();
@@ -49,7 +45,7 @@ public class CounterBarScrollView : MonoBehaviour
             _numberObjects.Add(number);
         }
 
-        _currentNumber = _startIndex;
+        _currentNumber = StartIndex;
         _numberObjects.First().SetTextColor(true);
     }
 
@@ -113,7 +109,7 @@ public class CounterBarScrollView : MonoBehaviour
         }
 
         _numberParent.localPosition =
-            new Vector3(_startPosX, _numberParent.localPosition.y, _numberParent.localPosition.z);
+            new Vector3(START_POS_X, _numberParent.localPosition.y, _numberParent.localPosition.z);
     }
 
 
