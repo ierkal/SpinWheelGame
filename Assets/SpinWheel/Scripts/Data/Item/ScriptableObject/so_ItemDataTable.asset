@@ -1,0 +1,317 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a604b441dff643799c36031802864907, type: 3}
+  m_Name: so_ItemDataTable
+  m_EditorClassIdentifier: 
+  ItemDataList:
+  - rid: 3050333365860302848
+  - rid: 3050333365860302849
+  - rid: 3050333365860302850
+  - rid: 3050333365860302851
+  - rid: 3050333365860302852
+  - rid: 3050333365860302853
+  - rid: 3050333365860302854
+  - rid: 3050333365860302855
+  - rid: 3050333365860302856
+  - rid: 3050333365860302857
+  - rid: 3050333365860302858
+  - rid: 3050333365860302859
+  - rid: 3050333365860302860
+  - rid: 3050333365860302861
+  - rid: 3050333365860302862
+  - rid: 3050333365860302863
+  - rid: 3050333365860302864
+  - rid: 3050333365860302865
+  - rid: 3050333365860302866
+  - rid: 3050333365860302867
+  - rid: 3050333365860302868
+  - rid: 3050333365860302869
+  - rid: 3050333365860302870
+  - rid: 3050333365860302871
+  - rid: 3050333365860302872
+  - rid: 3050333365860302873
+  - rid: 3050333365860302874
+  - rid: 3050333365860302875
+  - rid: 3050333365860302876
+  - rid: 3050333365860302877
+  - rid: 3050333365860302878
+  - rid: 3050333365860302879
+  - rid: 3050333365860302880
+  references:
+    version: 2
+    RefIds:
+    - rid: 3050333365860302848
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 1
+        <Name>k__BackingField: Aviator Glasses Easter
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_aviator_glasses_easter
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302849
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 2
+        <Name>k__BackingField: Baseball Cap Easter
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_baseball_cap_easter
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302850
+      type: {class: CurrencyData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 3
+        <Name>k__BackingField: Cash
+        <Amount>k__BackingField: 100
+        <IconName>k__BackingField: UI_icon_cash
+        <ItemType>k__BackingField: 1
+        ResourceType: 1
+    - rid: 3050333365860302851
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 4
+        <Name>k__BackingField: Big Chest
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_icon_chest_big_nolight
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302852
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 5
+        <Name>k__BackingField: Bronze Chest
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_icon_chest_Bronze_nolight
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302853
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 6
+        <Name>k__BackingField: Gold Chest
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_icon_chest_gold_nolight
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302854
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 7
+        <Name>k__BackingField: Silver Chest
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_icon_chest_silver_nolight
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302855
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 8
+        <Name>k__BackingField: Small Chest
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_icon_chest_small_noligt
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302856
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 9
+        <Name>k__BackingField: Standart Chest
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_icon_chest_standart_nolight
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302857
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 10
+        <Name>k__BackingField: Super Chest
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_icon_chest_super_nolight
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302858
+      type: {class: CurrencyData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 11
+        <Name>k__BackingField: Gold
+        <Amount>k__BackingField: 10
+        <IconName>k__BackingField: UI_icon_gold
+        <ItemType>k__BackingField: 1
+        ResourceType: 0
+    - rid: 3050333365860302859
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 12
+        <Name>k__BackingField: Pumpkin Helmet
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_helmet_pumpkin
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302860
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 13
+        <Name>k__BackingField: Bayonet Easter Time
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_mle_bayonet_easter_time
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302861
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 14
+        <Name>k__BackingField: Bayonet Summer Vice
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_mle_bayonet_summer_vice
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302862
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 15
+        <Name>k__BackingField: Grenade M26
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_render_cons_grenade_m26
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302863
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 16
+        <Name>k__BackingField: Grenade M67
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_render_cons_grenade_m67
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302864
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 17
+        <Name>k__BackingField: Healthshot Neurostim
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_render_cons_healthshot_2_neurostim
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302865
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 18
+        <Name>k__BackingField: Healthshot Regenerator
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_render_cons_healthshot_2_regenerator
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302866
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 19
+        <Name>k__BackingField: Molotov
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_icon_render_t_cons_molotov
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302867
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 20
+        <Name>k__BackingField: Tier-1 Shotgun
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icon_Renders_tier1_shotgun
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302868
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 21
+        <Name>k__BackingField: Tier-2 Melee
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icon_Renders_tier2_mle
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302869
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 22
+        <Name>k__BackingField: Tier-2 Rifle
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icon_Renders_tier2_rifle
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302870
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 23
+        <Name>k__BackingField: Tier-3 Shotgun
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icon_Renders_tier3_shotgun
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302871
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 24
+        <Name>k__BackingField: Tier-3 SMG
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icon_Renders_tier3_smg
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302872
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 25
+        <Name>k__BackingField: Tier-3 Sniper
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icon_Renders_tier3_sniper
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302873
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 26
+        <Name>k__BackingField: Armor Points
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icons_Armor_Points
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302874
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 27
+        <Name>k__BackingField: Knife Points
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icons_Knife_Points
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302875
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 28
+        <Name>k__BackingField: Pistol Points
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icons_Pistol_Points
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302876
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 30
+        <Name>k__BackingField: Rifle Points
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icons_Rifle_Points
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302877
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 31
+        <Name>k__BackingField: Shotgun Points
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icons_Shotgun_Points
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302878
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 32
+        <Name>k__BackingField: SMG Points
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icons_SMG_Points
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302879
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 33
+        <Name>k__BackingField: Sniper Points
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: UI_Icons_Sniper_Points
+        <ItemType>k__BackingField: 0
+    - rid: 3050333365860302880
+      type: {class: ItemData, ns: SpinWheel.Scripts.Data.Item, asm: Assembly-CSharp}
+      data:
+        <Id>k__BackingField: 34
+        <Name>k__BackingField: Bomb
+        <Amount>k__BackingField: 1
+        <IconName>k__BackingField: ui_card_icon_death
+        <ItemType>k__BackingField: 2
