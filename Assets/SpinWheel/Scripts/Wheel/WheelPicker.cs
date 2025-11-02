@@ -23,8 +23,8 @@ namespace SpinWheel.Scripts.Wheel
 
         private void Start()
         {
-            ActiveOnly(BronzeWheel);
-            _currentTier = WheelType.Normal;
+            ActiveOnly(SilverWheel);
+            
 
             if (GameManager.Instance.StartIndex > 1)
                 OverridePicker();
@@ -32,9 +32,9 @@ namespace SpinWheel.Scripts.Wheel
 
         private void OverridePicker()
         {
-            if (GameManager.Instance.StartIndex > 0 && GameManager.Instance.StartIndex % 30 == 0)
+            if (GameManager.Instance.StartIndex > 1 && GameManager.Instance.StartIndex % 30 == 0)
                 new ZoneSpinRequested(WheelType.Super).Raise();
-            else if (GameManager.Instance.StartIndex > 0 && GameManager.Instance.StartIndex % 5 == 0)
+            else if (GameManager.Instance.StartIndex > 1 && GameManager.Instance.StartIndex % 5 == 0)
                 new ZoneSpinRequested(WheelType.Safe).Raise();
             else
                 RequestNormalWheel();
@@ -61,6 +61,7 @@ namespace SpinWheel.Scripts.Wheel
 
         private void OnCountIncrement(ZoneCountIncrement e)
         {
+            Debug.Log("here" + _currentTier);
             if (_zoneRequested || _currentTier == WheelType.Normal) return;
 
             RequestNormalWheel();

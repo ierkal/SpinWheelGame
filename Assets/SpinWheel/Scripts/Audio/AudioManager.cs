@@ -22,6 +22,8 @@ namespace SpineWheel.Scripts.Audio
             EventBroker.Instance.AddEventListener<OnGiveReward>(OnReward);
             EventBroker.Instance.AddEventListener<OnPlayerDies>(OnGameEnd);
             EventBroker.Instance.AddEventListener<OnSpinSkipRequested>(OnSpinSkip);
+            EventBroker.Instance.AddEventListener<OnReviveRequested>(OnRevive);
+            EventBroker.Instance.AddEventListener<OnGameEnds>(OnGameEnd);
         }
 
         private void OnDisable()
@@ -32,7 +34,21 @@ namespace SpineWheel.Scripts.Audio
             EventBroker.Instance.RemoveEventListener<OnGiveReward>(OnReward);
             EventBroker.Instance.RemoveEventListener<OnPlayerDies>(OnGameEnd);
             EventBroker.Instance.RemoveEventListener<OnSpinSkipRequested>(OnSpinSkip);
+            EventBroker.Instance.RemoveEventListener<OnReviveRequested>(OnRevive);
+            EventBroker.Instance.RemoveEventListener<OnGameEnds>(OnGameEnd);
+            
         }
+
+        private void OnGameEnd(OnGameEnds e)
+        {
+            _audioPlayer.Stop(AudioKey.PlayerDie);
+        }
+
+        private void OnRevive(OnReviveRequested e)
+        {
+            _audioPlayer.Stop(AudioKey.PlayerDie);
+        }
+
         private void OnSpinSkip(OnSpinSkipRequested e)
         {
             _audioPlayer.Stop(AudioKey.WheelSpin);

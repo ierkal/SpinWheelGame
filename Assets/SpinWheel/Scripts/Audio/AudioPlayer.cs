@@ -15,8 +15,6 @@ namespace SpinWheel.Scripts.Audio
 
         public void Play(AudioKey key)
         {
-            _fadeTween?.Kill();
-            _source.DOKill();
 
             var entry = _audioList.Find(x => x.Key == key);
 
@@ -29,7 +27,7 @@ namespace SpinWheel.Scripts.Audio
             var entry = _audioList.Find(x => x.Key == key);
 
             _fadeTween?.Kill();
-
+            _fadeTween = DOTween.Sequence();
             if (entry.FadeOut)
             {
                 _fadeTween.Append(_source.DOFade(0f, 1.2f)

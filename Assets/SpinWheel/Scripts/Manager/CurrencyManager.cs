@@ -35,8 +35,7 @@ namespace SpinWheel.Scripts.Manager
 
         private void OnRevive(OnReviveRequested e)
         {
-            int reviveCost = CalculateReviveCost(e.ReviveCount);
-            _gold -= reviveCost;
+            _gold = Mathf.Abs(_gold-_reviveCost);
         }
 
         private void OnGiveUp(OnGameEnds e)
