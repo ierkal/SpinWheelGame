@@ -98,10 +98,10 @@ public class CounterBarScrollView : MonoBehaviour
     private void ResetCounter()
     {
         _spinCount = 0;
-        _currentNumber = _startIndex;
+        _currentNumber = 1;
         _countNumbers.Clear();
 
-        for (int i = _startIndex; i < _startIndex + _countNumbers.Capacity; i++)
+        for (int i = _currentNumber; i < _currentNumber + _countNumbers.Capacity; i++)
         {
             _countNumbers.Add(i);
         }
