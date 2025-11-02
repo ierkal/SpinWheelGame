@@ -296,6 +296,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2292185841751183381}
     m_Modifications:
+    - target: {fileID: 2595173080551192260, guid: 15e0053ba2a374d809a09c8128459586,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2595173080551192260, guid: 15e0053ba2a374d809a09c8128459586,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2595173080551192260, guid: 15e0053ba2a374d809a09c8128459586,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 2595173080551192260, guid: 15e0053ba2a374d809a09c8128459586,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7565752958717756198, guid: 15e0053ba2a374d809a09c8128459586,
         type: 3}
       propertyPath: m_Pivot.x
@@ -384,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 7565752958717756198, guid: 15e0053ba2a374d809a09c8128459586,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 7565752958717756198, guid: 15e0053ba2a374d809a09c8128459586,
         type: 3}
