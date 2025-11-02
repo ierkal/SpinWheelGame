@@ -16,27 +16,28 @@ namespace SpinWheel.Scripts.Audio
         public void Play(AudioKey key)
         {
             _fadeTween?.Kill();
+            _source.DOKill();
 
-            var audioEntry = _audioList.Find(x => x.Key == key);
-            _source.PlayOneShot(audioEntry.Clip, audioEntry.Volume);
+            var entry = _audioList.Find(x => x.Key == key);
+
+            _source.PlayOneShot(entry.Clip, entry.Volume);
         }
+
 
         public void Stop(AudioKey key)
         {
-            var audioEntry = _audioList.Find(x => x.Key == key);
+            var entry = _audioList.Find(x => x.Key == key);
 
-            if (audioEntry.FadeOut)
+            _fadeTween?.Kill();
+
+            if (entry.FadeOut)
             {
-                _fadeTween?.Kill();
-                _fadeTween = DOTween.Sequence();
-
-                float startVolume = _source.volume;
                 _fadeTween.Append(_source.DOFade(0f, 1.2f)
                     .SetEase(Ease.InQuad)
                     .OnComplete(() =>
                     {
                         _source.Stop();
-                        _source.volume = startVolume;
+                        _source.volume = 1f;
                         _fadeTween = null;
                     }));
             }
@@ -45,5 +46,6 @@ namespace SpinWheel.Scripts.Audio
                 _source.Stop();
             }
         }
+
     }
 }

@@ -250,6 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 814314200}
   - component: {fileID: 814314201}
+  - component: {fileID: 814314202}
   m_Layer: 5
   m_Name: ui_Container
   m_TagString: Untagged
@@ -288,6 +289,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814314199}
   m_CullTransparentMesh: 1
+--- !u!114 &814314202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814314199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97afc556caea1c44969477eb7ddec74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConformX: 1
+  ConformY: 1
+  Logging: 0
 --- !u!1 &1135183526
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +668,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2073787975646375394, guid: 351cfc1c431614d4892887277d66b33b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0007324219
+      objectReference: {fileID: 0}
     - target: {fileID: 3100179826056347774, guid: 351cfc1c431614d4892887277d66b33b,
         type: 3}
       propertyPath: m_Name
@@ -761,6 +782,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814970196499516490, guid: 351cfc1c431614d4892887277d66b33b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -39.335938
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 351cfc1c431614d4892887277d66b33b, type: 3}

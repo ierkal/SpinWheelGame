@@ -1,3 +1,4 @@
+using System;
 using SpinWheel.Scripts.Audio;
 using SpinWheel.Scripts.Utility.Event;
 using UnityEngine;
@@ -21,20 +22,17 @@ namespace SpineWheel.Scripts.Audio
             EventBroker.Instance.AddEventListener<OnGiveReward>(OnReward);
             EventBroker.Instance.AddEventListener<OnPlayerDies>(OnGameEnd);
             EventBroker.Instance.AddEventListener<OnSpinSkipRequested>(OnSpinSkip);
-            EventBroker.Instance.AddEventListener<OnReviveRequested>(OnRevive);
-            EventBroker.Instance.AddEventListener<OnGameEnds>(OnGiveUp);
         }
 
-        private void OnGiveUp(OnGameEnds e)
+        private void OnDisable()
         {
-            _audioPlayer.Stop(AudioKey.PlayerDie);
+            EventBroker.Instance.RemoveEventListener<OnWheelSpin>(OnSpin);
+            EventBroker.Instance.RemoveEventListener<OnWheelStop>(OnStop);
+            EventBroker.Instance.RemoveEventListener<ZoneSpinRequested>(OnZoneReach);
+            EventBroker.Instance.RemoveEventListener<OnGiveReward>(OnReward);
+            EventBroker.Instance.RemoveEventListener<OnPlayerDies>(OnGameEnd);
+            EventBroker.Instance.RemoveEventListener<OnSpinSkipRequested>(OnSpinSkip);
         }
-
-        private void OnRevive(OnReviveRequested e)
-        {
-            _audioPlayer.Stop(AudioKey.PlayerDie);
-        }
-
         private void OnSpinSkip(OnSpinSkipRequested e)
         {
             _audioPlayer.Stop(AudioKey.WheelSpin);
