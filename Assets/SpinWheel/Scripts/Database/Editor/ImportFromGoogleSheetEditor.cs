@@ -28,7 +28,6 @@ namespace SpinWheel.Scripts.Database.Editor
 
         private static ResourceType DetermineResourceType(string itemName)
         {
-            // Case-insensitive contains; tweak if you need locale-aware behavior
             return itemName?.IndexOf("Gold", StringComparison.OrdinalIgnoreCase) >= 0
                 ? ResourceType.Gold
                 : ResourceType.Cash;
@@ -36,7 +35,7 @@ namespace SpinWheel.Scripts.Database.Editor
 
         private static async Task ImportRewardsAsync()
         {
-            EnsureFolder(RewardTargetFolder);
+            CheckFolder(RewardTargetFolder);
 
             var cred = Resources.Load<TextAsset>("GoogleCredential");
             if (cred == null || string.IsNullOrWhiteSpace(cred.text))
@@ -52,7 +51,7 @@ namespace SpinWheel.Scripts.Database.Editor
                 var converter = new GoogleSheetConverter(GoogleSheetId, cred.text);
                 await container.Bake(converter);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Debug.LogError($"Google Sheet import failed: {ex.Message}\n{ex.StackTrace}");
                 return;
@@ -64,9 +63,6 @@ namespace SpinWheel.Scripts.Database.Editor
                 return;
             }
 
-            // 3) Create or update ItemDataSO assets
-            // 3) Create or update ItemDataSO assets
-            // 3) Create or update ItemDataSO assets
             int created = 0, updated = 0;
             foreach (var row in container.ItemContainer)
             {
@@ -78,7 +74,6 @@ namespace SpinWheel.Scripts.Database.Editor
 
                 if (row.ItemType == ItemType.Currency)
                 {
-                    // For Currency items, use CurrencyDataSO
                     var currencyAsset = AssetDatabase.LoadAssetAtPath<CurrencyDataSO>(assetPath);
                     isNew = currencyAsset == null;
 
@@ -93,12 +88,10 @@ namespace SpinWheel.Scripts.Database.Editor
                         updated++;
                     }
 
-                    // Determine ResourceType based on name
                     ResourceType resourceType = row.Name.IndexOf("Gold", StringComparison.OrdinalIgnoreCase) >= 0
                         ? ResourceType.Gold
                         : ResourceType.Cash;
 
-                    // Create CurrencyData with ResourceType
                     var currencyData = new CurrencyData(
                         row.Id,
                         row.Name,
@@ -108,7 +101,6 @@ namespace SpinWheel.Scripts.Database.Editor
                         resourceType
                     );
 
-                    // Set both the base ItemData AND the CurrencyData
                     currencyAsset.ItemData = currencyData;
                     currencyAsset.CurrencyData = currencyData;
 
@@ -116,7 +108,6 @@ namespace SpinWheel.Scripts.Database.Editor
                 }
                 else
                 {
-                    // For non-Currency items, use regular ItemDataSO
                     asset = AssetDatabase.LoadAssetAtPath<ItemDataSO>(assetPath);
                     isNew = asset == null;
 
@@ -131,7 +122,6 @@ namespace SpinWheel.Scripts.Database.Editor
                         updated++;
                     }
 
-                    // Fill/refresh fields from row
                     asset.ItemData = new ItemData(row.Id, row.Name, row.Amount, row.IconName, row.ItemType);
                 }
 
@@ -157,8 +147,8 @@ namespace SpinWheel.Scripts.Database.Editor
             var allRewards = rewardGuids
                 .Select(g => AssetDatabase.LoadAssetAtPath<ItemDataSO>(AssetDatabase.GUIDToAssetPath(g)))
                 .Where(r => r != null)
-                .Distinct() // safety
-                .OrderBy(r => r.name) // stable order
+                .Distinct()
+                .OrderBy(r => r.name) 
                 .ToList();
 
             if (allRewards.Count == 0)
@@ -206,7 +196,7 @@ namespace SpinWheel.Scripts.Database.Editor
             Debug.Log($"[ItemTable] Completed: Added {allRewards.Count} ItemDataSO assets to each ItemTable.");
         }
 
-        private static void EnsureFolder(string path)
+        private static void CheckFolder(string path)
         {
             path = path.Replace("\\", "/");
             if (AssetDatabase.IsValidFolder(path)) return;

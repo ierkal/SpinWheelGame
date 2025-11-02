@@ -10,6 +10,7 @@ namespace SpinWheel.Scripts.UI.Zone
 {
     public class SuperZoneTracker : ZoneTracker
     {
+        [Header("UI")]
         [SerializeField] private Image _zoneRewardImage;
 
         private ItemDataSO _zoneRewardItemSO;

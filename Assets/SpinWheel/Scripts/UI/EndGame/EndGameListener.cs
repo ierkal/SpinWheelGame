@@ -49,10 +49,6 @@ namespace SpinWheel.Scripts.UI.EndGame
         {
             _endGamePanel.gameObject.SetActive(true);
             _canvasGroup.alpha = 1;
-            
         }
-
-       
-        
     }
 }

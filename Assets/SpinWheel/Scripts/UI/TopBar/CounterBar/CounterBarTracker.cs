@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class CounterBarTracker : MonoBehaviour
 {
-    private const float START_POS_X = 500;
+    private const float START_POS_X = 500f;
+    private const float DEDUCT_POS=100f;
     
+    [Header( "References")]
     [SerializeField] private GameObject _numberPrefab;
     [SerializeField] private RectTransform _numberParent;
-    [SerializeField] private float _deductPos;
-    
     
     private readonly List<int> _countNumbers = new(14);
     private readonly List<CounterBarNumberObject> _numberObjects = new();
@@ -62,7 +62,7 @@ public class CounterBarTracker : MonoBehaviour
     private void DoMoveTopBar()
     {
         _numberParent.DOKill();
-        _numberParent.DOLocalMoveX(_numberParent.localPosition.x - _deductPos, 0.1f);
+        _numberParent.DOLocalMoveX(_numberParent.localPosition.x - DEDUCT_POS, 0.1f);
     }
 
     private void ReOrderList()
@@ -85,7 +85,7 @@ public class CounterBarTracker : MonoBehaviour
     private void RepositionNumbers()
     {
         _numberParent.localPosition = new Vector3(
-            _numberParent.localPosition.x + _deductPos,
+            _numberParent.localPosition.x + DEDUCT_POS,
             _numberParent.localPosition.y,
             _numberParent.localPosition.z
         );

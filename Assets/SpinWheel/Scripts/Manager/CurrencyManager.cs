@@ -31,7 +31,6 @@ namespace SpinWheel.Scripts.Manager
             EventBroker.Instance.RemoveEventListener<OnCurrencyChanged>(OnChange);
             EventBroker.Instance.RemoveEventListener<OnGameEnds>(OnGiveUp);
             EventBroker.Instance.RemoveEventListener<OnReviveRequested>(OnRevive);
-            
         }
 
         private void OnRevive(OnReviveRequested e)
@@ -80,6 +79,5 @@ namespace SpinWheel.Scripts.Manager
         {
             return _reviveCost * reviveCount;
         }
-    
     }
 }

@@ -10,7 +10,13 @@ namespace SpinWheel.Scripts.UI.Zone
         protected override void Awake()
         {
             base.Awake();
-            new ZoneSpinRequested(ZoneData.WheelType).Raise();
+            RaiseRequestEvent();
+        }
+
+        protected override void OnGameEnd(OnGameEnds e)
+        {
+            base.OnGameEnd(e);
+            RaiseRequestEvent();
         }
 
         protected override void OnIncrement(ZoneCountIncrement e)
@@ -19,7 +25,10 @@ namespace SpinWheel.Scripts.UI.Zone
 
             if (!IsCountReached()) return;
 
-            do { HandleThresholdReached(); } while (IsCountReached());
+            do
+            {
+                HandleThresholdReached();
+            } while (IsCountReached());
         }
 
         protected override void HandleThresholdReached()
@@ -33,6 +42,11 @@ namespace SpinWheel.Scripts.UI.Zone
             }
 
             UpdateText();
+        }
+
+        private void RaiseRequestEvent()
+        {
+            new ZoneSpinRequested(ZoneData.WheelType).Raise();
         }
     }
 }

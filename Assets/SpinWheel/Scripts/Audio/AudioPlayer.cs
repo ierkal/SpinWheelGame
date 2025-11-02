@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using SpineWheel.Scripts.Audio;
 using UnityEngine;
 
 namespace SpinWheel.Scripts.Audio

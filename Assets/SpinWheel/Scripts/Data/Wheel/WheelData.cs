@@ -25,14 +25,15 @@ public class WheelData : ScriptableObject
     public WheelType WheelType;
 
     [Header("Item Settings")]
+    public GameObject ItemPrefab;
+    
     [ValidateInput("@Items.Count >= 8",
         "There must be exact same number of items related to slice count of wheel.")]
     public List<ItemDataSO> Items = new();
 
     private ItemTable ItemTable => GameManager.Instance.ItemTable;
-
     private ItemRuntimeTableData ItemRuntimeTableData => GameManager.Instance.ItemRuntimeTableData;
-    public GameObject ItemPrefab;
+    
     private List<ItemData> _itemList;
     public int PickItemIndex() => Random.Range(0, _itemList.Count);
 

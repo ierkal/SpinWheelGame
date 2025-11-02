@@ -44,7 +44,6 @@ namespace SpinWheel.Scripts.Data.Item
 
         private float GetRandomCurrencyMultiplier() => Random.Range(1.1f, 1.3f);
 
-        // FIX: allow 0 or 1 -> use (0,2) with int overload, or floats rounded.
         private int GetRandomItemIncrement() => Random.Range(0, 2);
     }
 

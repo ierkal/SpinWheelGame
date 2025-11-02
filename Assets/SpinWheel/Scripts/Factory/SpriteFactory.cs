@@ -6,7 +6,6 @@ namespace SpinWheel.Scripts.Factory
 {
     public static class SpriteFactory
     {
-        private const string BombIconName = "ui_card_icon_death";
         public static Sprite GetSprite(string iconName)
         {
             try
@@ -22,11 +21,6 @@ namespace SpinWheel.Scripts.Factory
                 Debug.LogError("sprite icon: "+ iconName + " " + e.Message);
                 return null;
             }
-        }
-
-        public static Sprite GetBombSprite()
-        {
-            return GetSprite(BombIconName);
         }
     }
 }

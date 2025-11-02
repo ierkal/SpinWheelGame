@@ -9,13 +9,13 @@ public class CounterBarNumberObject : MonoBehaviour
 {
     [SerializeField] private TMP_Text _numberText;
 
-    private Color _textActiveColor = Color.black;
-    private Color _textInactiveColor = Color.white;
-    private Color _textSafeZoneColor = Color.green;
-    private Color _textSuperZoneColor = Color.yellow;
+    private readonly Color _textActiveColor = Color.black;
+    private readonly Color _textInactiveColor = Color.white;
+    private readonly Color _textSafeZoneColor = Color.green;
+    private readonly Color _textSuperZoneColor = Color.yellow;
 
-    private bool _isSafeZoneNumber => _value%5==0 || _value==1;
-    private bool _isSuperZoneNumber => _value%30==0;
+    private bool IsSafeZoneNumber => _value%5==0 || _value==1;
+    private bool IsSuperZoneNumber => _value%30==0;
     private int _value;
 
 
@@ -46,14 +46,14 @@ public class CounterBarNumberObject : MonoBehaviour
     }
     private void SetZoneColor()
     {
-        if(_isSafeZoneNumber)
+        if(IsSafeZoneNumber)
             SetSafeZoneColor();
-        if(_isSuperZoneNumber)
+        if(IsSuperZoneNumber)
             SetSuperZoneColor();
     }
     public void SetTextColor(bool isActive)
     {
-        if(_isSafeZoneNumber || _isSuperZoneNumber) return;
+        if(IsSafeZoneNumber || IsSuperZoneNumber) return;
         
         _numberText.color = isActive ? _textActiveColor : _textInactiveColor;
     }

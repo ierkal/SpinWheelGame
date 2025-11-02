@@ -6,6 +6,5 @@ namespace SpinWheel.Scripts.UI.EndGame
     public class ReviveData : ScriptableObject
     {
         public int ReviveCost;
-        public float ReviveCostMultiplier;
     }
 }

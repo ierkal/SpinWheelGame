@@ -22,7 +22,6 @@ namespace SpinWheel.Scripts.Data.Item
         {
             if (_amountText == null || _itemData == null) return;
 
-            // Show/hide for bombs if you want:
             bool show = _itemData.ItemType != ItemType.Bomb;
             _amountText.gameObject.SetActive(show);
             if (!show) return;

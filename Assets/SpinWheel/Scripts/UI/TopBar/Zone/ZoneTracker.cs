@@ -14,12 +14,12 @@ namespace SpinWheel.Scripts.UI.Zone
     {
         [Header("UI")]
         [SerializeField] protected TMP_Text ZoneCountText;
-
+        [Header("Data")]
         [SerializeField] protected ZoneData ZoneData;
         protected int CurrentZoneCount = 0;
         private int _initialRequiredZoneCount;
 
-        protected Sequence Sequence;
+        private Sequence _sequence;
         protected virtual void Awake()
         {
             UpdateText();
@@ -44,10 +44,10 @@ namespace SpinWheel.Scripts.UI.Zone
             EventBroker.Instance.RemoveEventListener<ZoneCountIncrement>(OnIncrement);
             EventBroker.Instance.RemoveEventListener<OnGameEnds>(OnGameEnd);
             
-            Sequence?.Kill();
+            _sequence?.Kill();
         }
 
-        private void OnGameEnd(OnGameEnds e)
+        protected virtual void OnGameEnd(OnGameEnds e)
         {
             CurrentZoneCount = 0;
             ZoneData.RequiredZoneCount = _initialRequiredZoneCount;

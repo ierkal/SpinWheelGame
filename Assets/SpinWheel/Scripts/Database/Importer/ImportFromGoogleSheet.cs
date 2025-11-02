@@ -1,16 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Cathei.BakingSheet;
 using Cathei.BakingSheet.Unity;
 using SpinWheel.Scripts.Data.Item;
 using SpinWheel.Scripts.Database.Importer;
 using SpinWheel.Scripts.Database.Importer.Containers;
-using SpinWheel.Scripts.SceneControl;
 using SpinWheel.Scripts.Utility.Event;
-using UnityEditor;
 using UnityEngine;
 
 namespace SpinWheel.Scripts.Database
@@ -39,7 +34,7 @@ namespace SpinWheel.Scripts.Database
             var logger = new UnityLogger();
             _container = new SheetContainer(logger);
             var converter = new GoogleSheetConverter(GoogleSheetId, credPath);
-            JsonSheetConverter jsonConverter = new(Application.persistentDataPath); //new("Assets/Database/JSONFiles");
+            JsonSheetConverter jsonConverter = new(Application.persistentDataPath);
             Task task = _container.Bake(converter);
             yield return new WaitUntil(() => task.IsCompleted);
             task = _container.Store(jsonConverter);
@@ -49,9 +44,9 @@ namespace SpinWheel.Scripts.Database
             ProcessRewardData();
 
             new SceneLoadProgressEvent(0.7f).Raise();
-            yield return new WaitForSeconds(1f); // slight delay
+            yield return new WaitForSeconds(1f); 
             new SceneLoadProgressEvent(0.9f).Raise();
-            yield return new WaitForSeconds(0.3f); // slight delay
+            yield return new WaitForSeconds(0.3f);
 
             Debug.Log("[BakingSheet] Reward Item Data imported.");
             new SceneLoadProgressEvent(1f).Raise();

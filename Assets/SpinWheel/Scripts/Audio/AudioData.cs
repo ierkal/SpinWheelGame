@@ -1,5 +1,4 @@
 using System;
-using SpinWheel.Scripts.Utility.Event;
 using UnityEngine;
 
 namespace SpinWheel.Scripts.Audio
