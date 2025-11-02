@@ -93,7 +93,6 @@ MonoBehaviour:
   _numberPrefab: {fileID: 2517340733414016489, guid: 1106d3cc90c3c4e73925e87e9f5728d5,
     type: 3}
   _numberParent: {fileID: 7565752959445417942}
-  _deductPos: 100
 --- !u!1 &7565752958619651874
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,9 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -332,7 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

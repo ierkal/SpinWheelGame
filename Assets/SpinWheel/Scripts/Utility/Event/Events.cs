@@ -11,11 +11,9 @@ namespace SpinWheel.Scripts.Utility.Event
     public class OnWheelStop : GameEvent
     {
         public ItemData ItemData;
-        public WheelType WheelType;
-        public OnWheelStop(ItemData itemData, WheelType wheelType)
+        public OnWheelStop(ItemData itemData)
         {
             ItemData = itemData;
-            WheelType = wheelType;
         }
     }
 

@@ -9,11 +9,12 @@ namespace SpinWheel.Scripts.Wheel
     public class WheelSpinner : MonoBehaviour
     {
         public RectTransform WheelRectTransform;
+        
         private bool _isSpinning;
         private Sequence _wheelSequence;
         private WheelData _wheelData;
         private Wheel _wheel;
-        private int rewardIndex;
+        private int _rewardIndex;
         private void Awake()
         {
             _wheelData = GetComponent<Wheel>().WheelData;
@@ -33,8 +34,8 @@ namespace SpinWheel.Scripts.Wheel
         private void CalculateSpin(OnWheelSpin e)
         {
             float angle = _wheelData.WheelRadius / _wheelData.SliceCount;
-            rewardIndex = _wheelData.PickItemIndex();
-            float fixedTargetAngle = rewardIndex * angle;
+            _rewardIndex = _wheelData.PickItemIndex();
+            float fixedTargetAngle = _rewardIndex * angle;
             float targetAngleOffset = fixedTargetAngle + RandomOffset();
             float currentZ = WheelRectTransform.localEulerAngles.z;
             float delta = Mathf.DeltaAngle(currentZ, targetAngleOffset);
@@ -59,8 +60,8 @@ namespace SpinWheel.Scripts.Wheel
         {
             _wheelSequence?.Kill();
             
-            ItemData itemData = _wheel.PickItem(rewardIndex);
-            new OnWheelStop(itemData,_wheelData.WheelType).Raise();
+            ItemData itemData = _wheel.PickItem(_rewardIndex);
+            new OnWheelStop(itemData).Raise();
             
             new OnGiveReward(itemData,_wheelData.WheelType).Raise();
         }
@@ -68,8 +69,8 @@ namespace SpinWheel.Scripts.Wheel
         {
             _wheelSequence?.Kill();
             
-            ItemData itemData = _wheel.PickItem(rewardIndex);
-            new OnWheelStop(itemData,_wheelData.WheelType).Raise();
+            ItemData itemData = _wheel.PickItem(_rewardIndex);
+            new OnWheelStop(itemData).Raise();
             
             new OnGiveReward(itemData,_wheelData.WheelType).Raise();
         }

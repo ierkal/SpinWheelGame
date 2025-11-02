@@ -5,6 +5,7 @@ using UnityEngine;
 public class AspectScaler : MonoBehaviour
 {
     private const float REF_ASPECT_RATIO = 2.22f;
+    
     private RectTransform _rectTransform;
     private float _aspectRatio;
     [SerializeField] private float _minScale = 1f;

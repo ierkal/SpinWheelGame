@@ -67,7 +67,6 @@ namespace SpinWheel.Scripts.Database
         {
             if (row.ItemType == ItemType.Currency)
             {
-                Debug.Log("currency created");
                 ResourceType resourceType = DetermineResourceType(row.Name);
                 return new CurrencyData(row.Id, row.Name, row.Amount, row.IconName, row.ItemType, resourceType);
             }
