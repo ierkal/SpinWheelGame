@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using SpinWheel.Scripts.Data.Item;
 using SpinWheel.Scripts.Utility.Event;
@@ -20,22 +19,17 @@ namespace SpinWheel.Scripts.Wheel
             _wheelData = GetComponent<Wheel>().WheelData;
             _wheel = GetComponent<Wheel>();
         }
-
         private void OnEnable()
         {
             EventBroker.Instance.AddEventListener<OnWheelSpin>(CalculateSpin);
             EventBroker.Instance.AddEventListener<OnSpinSkipRequested>(SkipRequested);
         }
-
         private void OnDisable()
         {
             EventBroker.Instance.RemoveEventListener<OnWheelSpin>(CalculateSpin);
             EventBroker.Instance.RemoveEventListener<OnSpinSkipRequested>(SkipRequested);
             
         }
-
-       
-
         private void CalculateSpin(OnWheelSpin e)
         {
             float angle = _wheelData.WheelRadius / _wheelData.SliceCount;

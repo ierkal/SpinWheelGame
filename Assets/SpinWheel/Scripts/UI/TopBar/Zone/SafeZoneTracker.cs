@@ -1,7 +1,4 @@
-using DG.Tweening;
 using SpinWheel.Scripts.Utility.Event;
-using SpinWheel.Scripts.Wheel;
-using UnityEngine;
 
 namespace SpinWheel.Scripts.UI.Zone
 {

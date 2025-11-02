@@ -1,12 +1,8 @@
-using System;
 using DG.Tweening;
-using SpinWheel.Scripts.Data.Item;
 using SpinWheel.Scripts.Manager;
 using SpinWheel.Scripts.Utility.Event;
-using SpinWheel.Scripts.Wheel;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SpinWheel.Scripts.UI.Zone
 {
@@ -30,7 +26,7 @@ namespace SpinWheel.Scripts.UI.Zone
             _initialRequiredZoneCount = ZoneData.RequiredZoneCount;
             
             CurrentZoneCount = GameManager.Instance ? GameManager.Instance.StartIndex : 0;
-            CatchUpIfNeeded();
+            CatchUpWithStartIndex();
         }
 
         private void OnEnable()
@@ -51,7 +47,7 @@ namespace SpinWheel.Scripts.UI.Zone
         {
             CurrentZoneCount = 0;
             ZoneData.RequiredZoneCount = _initialRequiredZoneCount;
-            CatchUpIfNeeded();
+            CatchUpWithStartIndex();
             UpdateText();
         }
 
@@ -66,7 +62,7 @@ namespace SpinWheel.Scripts.UI.Zone
             if (!ZoneCountText) return;
             ZoneCountText.text = ZoneData.RequiredZoneCount.ToString();
         }
-        private void CatchUpIfNeeded()
+        private void CatchUpWithStartIndex()
         {
             while (IsCountReached())
             {

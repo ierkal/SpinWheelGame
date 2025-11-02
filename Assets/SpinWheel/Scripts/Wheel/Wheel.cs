@@ -9,8 +9,9 @@ namespace SpinWheel.Scripts.Wheel
     {
         public WheelData WheelData;
         public Transform ParentTransform;
-        private List<Transform> _rewardParentTransforms;
-        private readonly List<ItemPrefab> _itemPrefabs = new();
+        
+        private List<Transform> _sliceParentTransformList;
+        private readonly List<ItemPrefab> _itemPrefabList = new();
         private readonly List<ItemData> _itemDataList = new();
 
         private void Awake()
@@ -25,14 +26,14 @@ namespace SpinWheel.Scripts.Wheel
         private void OnGiveUp(OnGameEnds e)
         {
             WheelProgressTracker.Instance.ResetWheel(WheelData.WheelType);
-            RefreshItem();
+            RefreshItemList();
         }
 
         private void OnStop(OnWheelStop e)
         {
             WheelProgressTracker.Instance.ApplyAll(WheelData.WheelType);
             
-            RefreshItem();
+            RefreshItemList();
         }
 
         private void InitializeRewards()
@@ -47,23 +48,23 @@ namespace SpinWheel.Scripts.Wheel
 
             for (int i = 0; i < _itemDataList.Count; i++)
             {
-                var go = Instantiate(WheelData.ItemPrefab, _rewardParentTransforms[i]);
+                var go = Instantiate(WheelData.ItemPrefab, _sliceParentTransformList[i]);
                 var itemPrefab = go.GetComponent<ItemPrefab>();
                 itemPrefab.SetItemData(_itemDataList[i]);
-                _itemPrefabs.Add(itemPrefab);
+                _itemPrefabList.Add(itemPrefab);
             }
         }
 
         private void InitializeRewardParentList()
         {
-            _rewardParentTransforms = new List<Transform>();
+            _sliceParentTransformList = new List<Transform>();
             for (int i = 0; i < ParentTransform.childCount; i++)
-                _rewardParentTransforms.Add(ParentTransform.GetChild(i));
+                _sliceParentTransformList.Add(ParentTransform.GetChild(i));
         }
 
-        private void RefreshItem()
+        private void RefreshItemList()
         {
-            foreach (var itemPrefab in _itemPrefabs)
+            foreach (var itemPrefab in _itemPrefabList)
             {
                 itemPrefab.UpdateText();
             }

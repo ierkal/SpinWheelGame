@@ -12,6 +12,7 @@ namespace SpinWheel.Scripts.Wheel
         [SerializeField] private float _currencyMin = 1.03f;
 
         [SerializeField] private float _currencyMax = 1.08f;
+        
         private readonly int _itemIncrementChance = 10;
         private readonly int _itemIncrement = 1;
 
@@ -61,7 +62,6 @@ namespace SpinWheel.Scripts.Wheel
                 item.ResetAmount();
         }
 
-        // optional single-call helper used by your Wheel.OnStop
         public void ApplyAll(WheelType type)
         {
             ApplyCurrencyMultiplier(type);

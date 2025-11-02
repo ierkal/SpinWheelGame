@@ -42,6 +42,11 @@ public class Inventory : MonoBehaviour
 
     private void OnGameEnds(OnGameEnds e)
     {
+        ClearInventory();
+    }
+
+    private void ClearInventory()
+    {
         _ownedItems.Clear();
         foreach (var item in _inventoryItemDict.Values)
             Destroy(item.gameObject);
@@ -54,25 +59,30 @@ public class Inventory : MonoBehaviour
         
         if(e.ItemData.ItemType == ItemType.Bomb) return;
         
-        var existing = _ownedItems.Find(x => x.Id == e.ItemData.Id);
-        if (existing == null)
+        var existingItem = _ownedItems.Find(x => x.Id == e.ItemData.Id);
+        if (existingItem == null)
         {
             var data = new InventoryItemData(e.ItemData.Id, e.ItemData.Name, e.ItemData.Amount, e.ItemData.IconSprite);
-            _ownedItems.Add(data);
-
-            InventoryItem inventoryItem = Instantiate(_inventoryItemPrefab, _inventoryItemParent).GetComponent<InventoryItem>();
-            inventoryItem.SetData(data);
-            _inventoryItemDict[data.Id] = inventoryItem;
+            AddNewItem(data);
         }
         else
         {
-            var oldAmount = existing.Amount;
-            existing.AddAmount(e.ItemData.Amount);
-            var newAmount = existing.Amount;
+            var oldAmount = existingItem.Amount;
+            existingItem.AddAmount(e.ItemData.Amount);
+            var newAmount = existingItem.Amount;
 
-            if (_inventoryItemDict.TryGetValue(existing.Id, out var item))
+            if (_inventoryItemDict.TryGetValue(existingItem.Id, out var item))
                 item.IncreaseAmount(oldAmount, newAmount);
         }
+    }
+
+    private void AddNewItem(InventoryItemData data)
+    {
+        _ownedItems.Add(data);
+
+        InventoryItem inventoryItem = Instantiate(_inventoryItemPrefab, _inventoryItemParent).GetComponent<InventoryItem>();
+        inventoryItem.SetData(data);
+        _inventoryItemDict[data.Id] = inventoryItem;
     }
 
     private void ExitWithInventory()

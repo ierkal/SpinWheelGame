@@ -19,30 +19,22 @@ namespace SpinWheel.Scripts.UI.Exit
         {
             _button.onClick.AddListener(OnClaimButtonClick);
         }
-
         private void OnEnable()
         {
             EventBroker.Instance.AddEventListener<OnExitRequested>(OnExit);
         }
-
         private void OnDisable()
         {
             EventBroker.Instance.RemoveEventListener<OnExitRequested>(OnExit);
         }
-
         private void OnExit(OnExitRequested e)
         {
             _exitPanel.SetActive(true);
 
-            // Clear existing items to prevent duplication
-            foreach (Transform child in _exitPanelContentParent)
-            {
-                Destroy(child.gameObject);
-            }
+            ClearObjects();
 
             var sequence = DOTween.Sequence();
 
-            // Instantiate items to the content parent first
             for (var i = 0; i < e.Items.Count; i++)
             {
                 var item = e.Items[i];
@@ -53,6 +45,14 @@ namespace SpinWheel.Scripts.UI.Exit
                     .SetEase(Ease.OutBack)
                     .OnComplete(() => { itemObj.transform.DOScale(Vector3.one, 0.1f); }));
                 sequence.AppendInterval(0.1f);
+            }
+        }
+
+        private void ClearObjects()
+        {
+            foreach (Transform child in _exitPanelContentParent)
+            {
+                Destroy(child.gameObject);
             }
         }
 

@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using SpinWheel.Scripts.Manager;
 using SpinWheel.Scripts.Utility.Event;
 using UnityEngine;
 
@@ -10,24 +6,23 @@ namespace SpinWheel.Scripts.Wheel
 {
     public class WheelPicker : MonoBehaviour
     {
-        [Header("Wheels")] public GameObject BronzeWheel;
+        [Header("Wheels")] 
+        public GameObject BronzeWheel;
         public GameObject SilverWheel;
         public GameObject GoldenWheel;
 
-        [Header("Animation")] [SerializeField] private float scaleUp = 1.3f;
-        [SerializeField] private float dur = 0.25f;
-        [SerializeField] private Ease ease = Ease.OutSine;
+        [Header("Animation")] [SerializeField] private float _scaleUp = 1.3f;
+        [SerializeField] private float _duration = 0.25f;
+        [SerializeField] private Ease _easeMode = Ease.OutSine;
 
-        private Sequence _seq;
+        private Sequence _sequence;
         private WheelType _currentTier = WheelType.Normal;
 
         private bool _zoneRequested;
 
         private void Start()
         {
-            EnsureOnly(BronzeWheel);
-            
-
+            ActiveOnly(BronzeWheel);
         }
   
         private void Awake()
@@ -42,7 +37,6 @@ namespace SpinWheel.Scripts.Wheel
             EventBroker.Instance.RemoveEventListener<ZoneSpinRequested>(OnZoneSpinRequested);
             EventBroker.Instance.RemoveEventListener<ZoneCountIncrement>(OnCountIncrement);
             EventBroker.Instance.RemoveEventListener<OnGameEnds>(OnGiveUp);
-            _seq?.Kill();
         }
 
         private void OnGiveUp(OnGameEnds e)
@@ -61,7 +55,7 @@ namespace SpinWheel.Scripts.Wheel
         {
             var from = GetWheel(_currentTier);
             var to = GetWheel(WheelType.Normal);
-            SwitchWheelsAnimated(from, to);
+            DoSwitch(from, to);
             _currentTier = WheelType.Normal;
         }
 
@@ -77,10 +71,34 @@ namespace SpinWheel.Scripts.Wheel
             _zoneRequested = true;
             var from = GetWheel(_currentTier);
             var to = GetWheel(e.Type);
-            SwitchWheelsAnimated(from, to);
+            DoSwitch(from, to);
             _currentTier = e.Type;
         }
 
+
+        private void DoSwitch(GameObject from, GameObject to)
+        {
+            if (from == null || to == null)
+            {
+                ActiveOnly(to);
+                return;
+            }
+
+            _sequence?.Kill();
+            _sequence = DOTween.Sequence();
+
+            var fromT = from.transform;
+            var toT = to.transform;
+
+            _sequence.Append(fromT.DOScale(_scaleUp, _duration).SetEase(_easeMode).OnComplete(() =>
+                {
+                    from.SetActive(false);
+                    to.SetActive(true);
+                    toT.localScale = Vector3.one * _scaleUp;
+                }))
+                .Append(toT.DOScale(1f, _duration).SetEase(_easeMode));
+        }
+        
         private GameObject GetWheel(WheelType type) =>
             type switch
             {
@@ -90,36 +108,11 @@ namespace SpinWheel.Scripts.Wheel
                 _ => BronzeWheel
             };
 
-        private void EnsureOnly(GameObject only)
+        private void ActiveOnly(GameObject only)
         {
             if (BronzeWheel) BronzeWheel.SetActive(only == BronzeWheel);
             if (SilverWheel) SilverWheel.SetActive(only == SilverWheel);
             if (GoldenWheel) GoldenWheel.SetActive(only == GoldenWheel);
-        }
-
-        private void SwitchWheelsAnimated(GameObject from, GameObject to)
-        {
-            if (from == null || to == null)
-            {
-                EnsureOnly(to);
-                return;
-            }
-
-            _seq?.Kill();
-            _seq = DOTween.Sequence();
-
-            var fromT = from.transform;
-            var toT = to.transform;
-
-
-
-            _seq.Append(fromT.DOScale(scaleUp, dur).SetEase(ease).OnComplete(() =>
-                {
-                    from.SetActive(false);
-                    to.SetActive(true);
-                    toT.localScale = Vector3.one * scaleUp;
-                }))
-                .Append(toT.DOScale(1f, dur).SetEase(ease));
         }
     }
 }

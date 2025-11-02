@@ -1,8 +1,6 @@
-using DG.Tweening;
 using SpinWheel.Scripts.Data.Item;
 using SpinWheel.Scripts.Manager;
 using SpinWheel.Scripts.Utility.Event;
-using SpinWheel.Scripts.Wheel;
 using UnityEngine;
 using UnityEngine.UI;
 

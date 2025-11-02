@@ -32,6 +32,7 @@ namespace SpinWheel.Scripts.UI.Loading
             }
             _slider.DOKill();
             _slider.DOValue(Mathf.Min(1f, e.Progress),0.3f);
+            
             if (e.Progress >= 1f)
             {
                 _cg.DOKill();

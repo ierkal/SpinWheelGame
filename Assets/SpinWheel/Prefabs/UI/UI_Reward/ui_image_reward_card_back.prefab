@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3958784749973315266}
   - component: {fileID: 7394122714457704385}
   - component: {fileID: 1684698547114339542}
+  - component: {fileID: 6839583788593170605}
   m_Layer: 5
   m_Name: ui_image_reward_card_back
   m_TagString: Untagged
@@ -79,6 +80,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.6
+--- !u!114 &6839583788593170605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9192240567806770201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 933a8ab4f2b140cb8bad1280cbba1849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: b173f495da6ee41d08573f3f88661969, type: 2}
+  SpinImage: {fileID: 9056613165678600289}
+  CardImage: {fileID: 1684698547114339542}
 --- !u!1001 &1247869752703975925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -390,6 +406,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2760709918135382539}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9056613165678600289 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6629174112977506922, guid: 34db53d11d1fe4163919c41aeb3b2df0,
+    type: 3}
+  m_PrefabInstance: {fileID: 2760709918135382539}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3659115986724568966
 PrefabInstance:
   m_ObjectHideFlags: 0

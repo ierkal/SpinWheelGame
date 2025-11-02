@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using SpinWheel.Scripts.Utility.Event;
 using TMPro;
 using UnityEngine;
@@ -27,13 +24,11 @@ public class CounterBarNumberObject : MonoBehaviour
     private void OnDisable()
     {
         EventBroker.Instance.RemoveEventListener<ZoneCountIncrement>(OnCountIncrement);
-
     }
 
     private void OnCountIncrement(ZoneCountIncrement e)
     {
         bool isActive = e.Number == _value;
-        
         SetTextColor(isActive);
     }
 

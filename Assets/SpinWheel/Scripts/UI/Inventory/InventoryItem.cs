@@ -22,9 +22,9 @@ namespace SpinWheel.Scripts.UI.Inventory
         public void IncreaseAmount(float from, float to)
         {
             _amountTween?.Kill();
-            _amountTween = DOVirtual.Float(from, to, .25f, val =>
+            _amountTween = DOVirtual.Float(from, to, .25f, value =>
                 {
-                    _itemAmountText.text = ((int)val).ToString();
+                    _itemAmountText.text = ((int)value).ToString();
                 })
                 .SetEase(Ease.Linear);
         }

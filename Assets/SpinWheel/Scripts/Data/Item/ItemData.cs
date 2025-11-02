@@ -13,7 +13,8 @@ namespace SpinWheel.Scripts.Data.Item
     {
         private float _originalAmount;
 
-        public ItemData(string id, string name, float amount, string iconName, ItemType itemType, float originalAmount = 1)
+        public ItemData(string id, string name, float amount, string iconName, ItemType itemType,
+            float originalAmount = 1)
         {
             Id = id;
             Name = name;
@@ -37,14 +38,25 @@ namespace SpinWheel.Scripts.Data.Item
             return clone;
         }
 
+        public CurrencyData DecideCurrencyType(ItemData itemData)
+        {
+            var inferred = itemData.Name.IndexOf("Gold", StringComparison.OrdinalIgnoreCase) >= 0
+                ? ResourceType.Gold
+                : ResourceType.Cash;
+
+            var asCurrency = new CurrencyData(
+                itemData.Id,
+                itemData.Name,
+                itemData.Amount,
+                itemData.IconName,
+                itemData.ItemType,
+                inferred
+            );
+            return asCurrency;
+        }
+
         public void SetAmount(float amount) => Amount = amount;
         public void ResetAmount() => Amount = _originalAmount;
-
-        public float OriginalAmountSafe() => _originalAmount;
-
-        private float GetRandomCurrencyMultiplier() => Random.Range(1.1f, 1.3f);
-
-        private int GetRandomItemIncrement() => Random.Range(0, 2);
     }
 
     public enum ItemType

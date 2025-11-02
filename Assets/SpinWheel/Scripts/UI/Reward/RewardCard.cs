@@ -2,42 +2,34 @@ using System;
 using DG.Tweening;
 using SpinWheel.Scripts.Data.Item;
 using SpinWheel.Scripts.Utility.Event;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SpinWheel.Scripts.UI.Reward
 {
     public class RewardCard : MonoBehaviour
     {
-        [SerializeField] private RewardCardSettings _settings;
-        [SerializeField] private TMP_Text _titleText;
-        [SerializeField] private TMP_Text _amountText;
-        [SerializeField] private Image _itemImage;
+        private const float INITIAL_DELAY = 0.1f;
+        private const float FLIP_DURATION = 0.1f;
+        private const float DISPLAY_DURATION = 0.3f;
 
-        [SerializeField] private GameObject _frontCard;
-
-        [SerializeField] private GameObject _backCard;
-        [SerializeField] private Image _spinImage;
-        [SerializeField] private Image _cardImage;
+        [SerializeField] private RewardBackCard _backCard;
+        [SerializeField] private RewardFrontCard _frontCard;
 
         private Sequence _sequence;
         public Action OnRewardCardShown;
-
-
         public void ResetCard()
         {
             _frontCard.gameObject.SetActive(false);
-            _backCard.SetActive(true);
+            _backCard.gameObject.SetActive(true);
             _backCard.transform.localScale = Vector3.one;
         }
 
-        public void SetRewardCard(ItemData itemData)
+        public void SetRewardCard(ItemData itemData, WheelType wheelType)
         {
-            _titleText.text = itemData.Name;
-            _amountText.text = ((int)itemData.Amount).ToString();
-            _itemImage.sprite = itemData.IconSprite;
-
+            _frontCard.TitleText.text = itemData.Name;
+            _frontCard.AmountText.text = ((int)itemData.Amount).ToString();
+            _frontCard.ItemImage.sprite = itemData.IconSprite;
+            _backCard.ApplySettings(wheelType);
             DoFlip(itemData.ItemType == ItemType.Bomb);
         }
 
@@ -46,50 +38,49 @@ namespace SpinWheel.Scripts.UI.Reward
             _sequence?.Kill();
             _sequence = DOTween.Sequence();
 
-            _sequence.AppendInterval(0.1f).Append(_backCard.transform.DOScaleX(0, 0.1f)
-                    .OnComplete(() =>
-                    {
-                        _backCard.SetActive(false);
-                        _frontCard.SetActive(true);
-                        _frontCard.transform.localScale = new Vector3(0, 1, 1);
-                    }))
-                .Append(_frontCard.transform.DOScaleX(1, 0.1f));
-
-            if (!isBomb)
+            AnimateCardFlipToFront();
+        
+            if (isBomb)
             {
-                _sequence.AppendInterval(.3f)
-                    .Append(_frontCard.transform.DOScaleX(0, 0.1f)
-                        .OnComplete(() =>
-                        {
-                            _frontCard.gameObject.SetActive(false);
-                            _backCard.SetActive(true);
-                            _backCard.transform.localScale = Vector3.one;
-                            OnRewardCardShown?.Invoke();
-                        }));
+                HandleBombCard();
             }
             else
             {
-                new OnPlayerDies().Raise();
+                AnimateCardFlipToBack();
             }
         }
-
-        public void ApplySettings(WheelType wheelType)
+        private void AnimateCardFlipToFront()
         {
-            switch (wheelType)
-            {
-                case WheelType.Normal:
-                    _spinImage.sprite = _settings.NormalImage;
-                    _cardImage.color = _settings.NormalColor;
-                    break;
-                case WheelType.Safe:
-                    _spinImage.sprite = _settings.SafeImage;
-                    _cardImage.color = _settings.SafeColor;
-                    break;
-                case WheelType.Super:
-                    _spinImage.sprite = _settings.SuperImage;
-                    _cardImage.color = _settings.SuperColor;
-                    break;
-            }
+            _sequence.AppendInterval(INITIAL_DELAY)
+                .Append(_backCard.transform.DOScaleX(0, FLIP_DURATION)
+                    .OnComplete(ShowFrontCard))
+                .Append(_frontCard.transform.DOScaleX(1, FLIP_DURATION));
+        }
+
+        private void ShowFrontCard()
+        {
+            _backCard.gameObject.SetActive(false);
+            _frontCard.gameObject.SetActive(true);
+            _frontCard.transform.localScale = new Vector3(0, 1, 1);
+        }
+
+        private void AnimateCardFlipToBack()
+        {
+            _sequence.AppendInterval(DISPLAY_DURATION)
+                .Append(_frontCard.transform.DOScaleX(0, FLIP_DURATION)
+                    .OnComplete(ShowBackCard));
+        }
+
+        private void ShowBackCard()
+        {
+            _frontCard.gameObject.SetActive(false);
+            _backCard.gameObject.SetActive(true);
+            _backCard.transform.localScale = Vector3.one;
+            OnRewardCardShown?.Invoke();
+        }
+        private void HandleBombCard()
+        {
+            new OnPlayerDies().Raise();
         }
     }
 }

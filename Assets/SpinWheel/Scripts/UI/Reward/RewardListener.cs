@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using SpinWheel.Scripts.Data.Item;
@@ -11,16 +10,14 @@ public class RewardListener : MonoBehaviour
     [SerializeField] private RewardCard _rewardCard;
     [SerializeField] private CanvasGroup _canvasGroup;
 
-    // NEW: queue + state
     private readonly Queue<OnGiveReward> _pending = new();
-    private bool _isProcessing = false;
-    private bool _isShowingOne = false;
+    private bool _isProcessing;
+    private bool _isShowingOne;
 
     private void Awake()
     {
         _canvasGroup.gameObject.SetActive(false);
     }
-
     private void OnEnable()
     {
         EventBroker.Instance.AddEventListener<OnGiveReward>(OnGiveReward);
@@ -37,11 +34,8 @@ public class RewardListener : MonoBehaviour
         EventBroker.Instance.RemoveEventListener<OnReviveRequested>(OnRevive);
     }
 
-    // --- Event handlers ---
-
     private void OnRevive(OnReviveRequested e)
     {
-        // optional: clear queue so we don't show stale rewards after revive
         _pending.Clear();
         _isProcessing = false;
 
@@ -57,13 +51,10 @@ public class RewardListener : MonoBehaviour
         _canvasGroup.gameObject.SetActive(false);
         _rewardCard.ResetCard();
     }
-
     private void OnGameEnd(OnPlayerDies e)
     {
         _canvasGroup.blocksRaycasts = false;
     }
-
-    // Enqueue rewards; the coroutine will show them sequentially.
     private void OnGiveReward(OnGiveReward e)
     {
         _pending.Enqueue(e);
@@ -73,9 +64,6 @@ public class RewardListener : MonoBehaviour
             StartCoroutine(ProcessQueue());
         }
     }
-
-    // --- Queue processing ---
-
     private IEnumerator ProcessQueue()
     {
         while (_pending.Count > 0)
@@ -83,7 +71,6 @@ public class RewardListener : MonoBehaviour
             var e = _pending.Dequeue();
             ShowSingleReward(e);
 
-            // Wait until current card is closed
             _isShowingOne = true;
             while (_isShowingOne)
                 yield return null;
@@ -97,35 +84,22 @@ public class RewardListener : MonoBehaviour
         _canvasGroup.gameObject.SetActive(true);
         _canvasGroup.blocksRaycasts = true;
 
-        _rewardCard.ApplySettings(e.WheelType);
-        _rewardCard.SetRewardCard(e.ItemData);
-        _rewardCard.OnRewardCardShown = OnRewardCardClose; // your existing close hook
+        _rewardCard.SetRewardCard(e.ItemData,e.WheelType);
+        _rewardCard.OnRewardCardShown = OnRewardCardClose;
 
-        // If it's currency, apply when the reward is shown (keeps logic single-sourced)
         if (e.ItemData.ItemType == ItemType.Currency)
         {
-            var inferred = e.ItemData.Name.IndexOf("Gold", StringComparison.OrdinalIgnoreCase) >= 0
-                ? ResourceType.Gold
-                : ResourceType.Cash;
-
-            var asCurrency = new CurrencyData(
-                e.ItemData.Id,
-                e.ItemData.Name,
-                e.ItemData.Amount,
-                e.ItemData.IconName,
-                e.ItemData.ItemType,
-                inferred
-            );
+            CurrencyData asCurrency = e.ItemData.DecideCurrencyType(e.ItemData);
 
             new OnCurrencyChanged(asCurrency.ResourceType, (int)asCurrency.Amount).Raise();
         }
     }
+    
 
-    // Called by RewardCard when the user closes/continues
     private void OnRewardCardClose()
     {
         _canvasGroup.gameObject.SetActive(false);
         _canvasGroup.blocksRaycasts = false;
-        _isShowingOne = false; // allow the queue to proceed
+        _isShowingOne = false;
     }
 }
