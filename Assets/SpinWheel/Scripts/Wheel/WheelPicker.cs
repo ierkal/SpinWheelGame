@@ -27,20 +27,10 @@ namespace SpinWheel.Scripts.Wheel
         {
             EnsureOnly(BronzeWheel);
             
-            StartCoroutine(SeedFromStartIndexNextFrame());
 
         }
-        private IEnumerator SeedFromStartIndexNextFrame()
-        {
-            yield return null; // wait 1 frame
-
-            var gm = GameManager.Instance;
-            if (gm != null && gm.StartIndex > 0)
-            {
-                new ZoneCountIncrement(gm.StartIndex).Raise();
-            }
-        }
-        private void OnEnable()
+  
+        private void Awake()
         {
             EventBroker.Instance.AddEventListener<ZoneSpinRequested>(OnZoneSpinRequested);
             EventBroker.Instance.AddEventListener<ZoneCountIncrement>(OnCountIncrement);
