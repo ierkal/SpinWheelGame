@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using SpineWheel.Scripts.Audio;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace SpinWheel.Scripts.Audio
 {
     public class AudioPlayer : MonoBehaviour
     {
-        private Coroutine _fadeCoroutine;
+        private Sequence _fadeTween;
 
         [Header("Sound List")] [SerializeField]
         private List<AudioEntry> _audioList;
@@ -16,53 +17,35 @@ namespace SpinWheel.Scripts.Audio
 
         public void Play(AudioKey key)
         {
-            foreach (var audioEntry in _audioList)
-            {
-                if (audioEntry.Key == key && audioEntry.Clip != null)
-                {
-                    _source.PlayOneShot(audioEntry.Clip, audioEntry.Volume);
-                    return;
-                }
-            }
+            _fadeTween?.Kill();
+
+            var audioEntry = _audioList.Find(x => x.Key == key);
+            _source.PlayOneShot(audioEntry.Clip, audioEntry.Volume);
         }
 
         public void Stop(AudioKey key)
         {
-            foreach (var audioEntry in _audioList)
+            var audioEntry = _audioList.Find(x => x.Key == key);
+
+            if (audioEntry.FadeOut)
             {
-                if (audioEntry.Key != key) continue;
-                if (!_source.isPlaying) return;
+                _fadeTween?.Kill();
+                _fadeTween = DOTween.Sequence();
 
-                if (audioEntry.FadeOut)
-                {
-                    if (_fadeCoroutine != null)
-                        StopCoroutine(_fadeCoroutine);
-
-                    _fadeCoroutine = StartCoroutine(FadeOutAndStop(1.2f));
-                }
-                else
-                {
-                    _source.Stop();
-                }
-
-                return;
+                float startVolume = _source.volume;
+                _fadeTween.Append(_source.DOFade(0f, 1.2f)
+                    .SetEase(Ease.InQuad)
+                    .OnComplete(() =>
+                    {
+                        _source.Stop();
+                        _source.volume = startVolume;
+                        _fadeTween = null;
+                    }));
             }
-        }
-
-        private IEnumerator FadeOutAndStop(float duration)
-        {
-            float startVolume = _source.volume;
-            float time = 0f;
-
-            while (time < duration)
+            else
             {
-                time += Time.deltaTime;
-                _source.volume = Mathf.Lerp(startVolume, 0f, Mathf.Pow(time / duration, 2f));
-                yield return null;
+                _source.Stop();
             }
-            _source.Stop();
-            _source.volume = startVolume;
-            _fadeCoroutine = null;
         }
     }
 }
