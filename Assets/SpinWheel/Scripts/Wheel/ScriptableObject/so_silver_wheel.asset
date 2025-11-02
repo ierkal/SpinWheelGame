@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9499166333ab4f5ba512a0d659d9676, type: 3}
+  m_Name: so_silver_wheel
+  m_EditorClassIdentifier: 
+  WheelRadius: 360
+  SliceCount: 8
+  SpinCount: 3
+  Duration: 2
+  IdleSpinSpeed: 0.1
+  WheelType: 1
+  Items:
+  - {fileID: 11400000, guid: 0af118544253942aaa0b07f557b35d2a, type: 2}
+  - {fileID: 11400000, guid: 82690c775de83483a8e1199bb1915c7e, type: 2}
+  - {fileID: 11400000, guid: eed343c2a8c384001849b67fcc62ab83, type: 2}
+  - {fileID: 11400000, guid: 5393a691b08f748cc815b69bc8c0ad05, type: 2}
+  - {fileID: 11400000, guid: c5117b07c2a314446b1b1f0720c7b7cc, type: 2}
+  - {fileID: 11400000, guid: fb1a2b54c2f8e4c82b0ad0efb684ccbf, type: 2}
+  - {fileID: 11400000, guid: e6a90527f25334c85bcad6d021a1e2d8, type: 2}
+  - {fileID: 11400000, guid: 0d24da02b487b46fd8362fdb95887cc3, type: 2}
+  ItemPrefab: {fileID: 5323301012270370853, guid: 84e3bb7a0262d4249972c95e176f8176,
+    type: 3}
